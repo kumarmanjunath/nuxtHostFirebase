@@ -1,0 +1,85 @@
+<div class="main-content">
+      <div class="container-fluid">
+          <div class="row">
+                  <div class="col-md-12">
+                      <div class="card ">
+                          <div class="card-header ">
+                                  <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+                      
+                              <h4 class="card-title">View {{service.istype}} - <small class="description">
+                                      Booking Details </small></h4></div>
+                 <div class="card-body ">
+               <ul class="nav nav-pills nav-pills-warning" role="tablist">
+            <li class="nav-item">
+         <a class="nav-link  active show" data-toggle="tab" href="#link1" role="tablist"> Summary </a>
+      </li><li class="nav-item"><a class="nav-link" data-toggle="tab" href="#link2" (click)="bindgrid(service.smsbookingid)" role="tablist">
+           Other Details </a></li></ul><div class="tab-content tab-space" style="padding-top: 30px;    min-height: 345px;">
+                      <div class="tab-pane active show" id="link1"> 
+                              <div class="row">
+                           <div class="col-lg-6"><h6 style="display:inline">Email: </h6>{{service.email}}<br><h6 style="display:inline">Address: </h6>{{service.pickup_address}}<br><h6 style="display:inline">Booking Source: </h6>{{service.booking_source_id}}&nbsp;<b>{{service.mplatform}}</b>
+                              
+                              <br><h6 style="display:inline">Car Type: </h6>{{service.ltype}}
+                              
+                              <hr>
+                          <span *ngIf="service.chk==false">   <h6 style="display:inline">Duration (Days): </h6>{{service.days}}</span>  <span *ngIf="service.chk==true">   <h6 style="display:inline">Type: </h6>{{service.airport_type}}</span><br><h6 style="display:inline">Price / Day (Rs.): </h6>{{service.price_per_day}}<br><h6 style="display:inline">Basic Rental (Rs.): </h6>{{service.basic_rental}}<hr>
+                              <span *ngIf="service.chk==false">
+                              <h6 style="display:inline">Extra Kms: </h6>{{service.extra_kms}}<br><h6 style="display:inline">Charge / Extra Km (Rs.): </h6>{{service.charge_per_exta_km}}<br><h6 style="display:inline">Extra Kms Rental (Rs.): </h6>{{service.extra_kms_rental}}
+                              <hr><h6 style="display:inline">Extra Hrs: </h6>{{service.extra_hrs}}<br><h6 style="display:inline">Charge / Extra Hr (Rs.): </h6>{{service.charge_per_exta_hr}}<br><h6 style="display:inline">Extra Hrs Rental (Rs.): </h6>{{service.extra_hrs_rental}}
+                           </span>
+
+                          </div>
+                           <div class="col-lg-6" style="border-left: 1px solid #d2d2d2;"><div class="modal-body"><h6 style="display:inline">Coupon Code: </h6>{{service.coupon_code}}<br><h6 style="display:inline">Coupon Discount (%): </h6>{{service.coupon_discount_percentage}}<br><h6 style="display:inline">Discounted Amount (Rs.): </h6>{{service.coupon_discount}}<br>
+                              <h6 style="display:inline">Hype Discount Amount (Rs.): </h6>{{service.creditused}}<hr>
+                              <h6 style="display:inline">Agent </h6>{{service.agent_name}}<br><hr>
+                           <hr>
+                              <h6 style="display:inline">Driver Allowance per Day (Rs.): </h6>{{service.driver_allowance_per_day}}<br><h6 style="display:inline">Driver Allowance Charges (Rs.): </h6>{{service.driver_allowance_charges}}<hr><br>
+                              <h6 style="display:inline">GST ({{service.gstpercent}}%) (Rs.): </h6>{{service.gstamt}}
+                              <br>
+                              <h6 style="display:inline">Total Amount (Rs.): </h6>{{service.amount}}</div> </div>
+                       </div>
+                          </div>
+                           <div class="tab-pane" id="link2">
+                          
+                              <mat-table [dataSource]="listData"  matSort> 
+                                 <ng-container matColumnDef="drivername">
+                                   <mat-header-cell *matHeaderCellDef  mat-sort-header>Drive Name</mat-header-cell>
+                                   <mat-cell *matCellDef="let element" style="font-weight: 700;">{{element.drivername}}</mat-cell>
+                                 </ng-container>
+                                 <ng-container matColumnDef="driverphone">
+                                     <mat-header-cell *matHeaderCellDef  mat-sort-header>Driver Phone No.</mat-header-cell>
+                                     <mat-cell *matCellDef="let element"  style="font-weight: 700;">{{element.driverphone}}</mat-cell>
+                                   </ng-container>
+                                   <ng-container matColumnDef="driverreg">
+                                       <mat-header-cell *matHeaderCellDef  mat-sort-header>Vehicle Reg. No.</mat-header-cell>
+                                       <mat-cell *matCellDef="let element"  style="font-weight: 700;">{{element.driverreg}}</mat-cell>
+                                     </ng-container>
+                                     <ng-container matColumnDef="secretcode">
+                                         <mat-header-cell *matHeaderCellDef  mat-sort-header>Secret Code</mat-header-cell>
+                                         <mat-cell *matCellDef="let element"  style="font-weight: 700;">{{element.secretcode}}</mat-cell>
+                                       </ng-container>
+                                   
+                                       <ng-container matColumnDef="status">
+                                         <mat-header-cell *matHeaderCellDef  mat-sort-header>Status</mat-header-cell>
+                                         <mat-cell *matCellDef="let element"  style="font-weight: 700;">{{element.status}}</mat-cell>
+                                       </ng-container>
+                                  
+                                       <ng-container matColumnDef="createdon">
+                                           <mat-header-cell *matHeaderCellDef  mat-sort-header>Created on</mat-header-cell>
+                                           <mat-cell *matCellDef="let element" style="padding-right: 10px;font-weight: 700;">{{ element.createdon.seconds * 1000 | date:'dd-MMM-yyyy hh:mm:ss a' }}</mat-cell>
+                                         </ng-container>
+                              
+                               
+                                   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                 
+                                  
+                                
+                               </mat-table>
+                              </div>
+                         </div></div></div></div>
+           
+        </div>
+    </div>
+  </div>
+  
+  

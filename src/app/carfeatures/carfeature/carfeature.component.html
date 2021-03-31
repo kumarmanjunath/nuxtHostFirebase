@@ -1,0 +1,86 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+            <h4 class="card-title">Feature</h4>
+            <p class="card-category">Enter Features you want</p>
+
+          </div>
+          <div class="card-body">
+            <form [formGroup]="service.form" class="normal-form" autocomplete="off" (submit)="onSubmit()">
+              <mat-grid-list cols="2" style="padding-top: 4%;" rowHeight="150px">
+                <div class="row">
+                  <div class="col-md-6">
+
+                    <div class="controles-container">
+                      <input type="hidden" formControlName="id">
+                      <input type="hidden" formControlName="hdescription">
+                      <input type="hidden" formControlName="hfeatureicon">
+
+                      <input type="hidden" formControlName="hactive">
+                      <mat-form-field>
+                        <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+          -->
+                        <input formControlName="description" matInput required>
+
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+
+                      <a mat-raised-button (click)="fileInput.click()" style="color: #fafafa;background: linear-gradient(60deg, #ff4081, #ef1961);width: 50%;border-radius: 47px;" >
+                          <mat-icon>upload</mat-icon>Upload
+                      </a>
+                  <input hidden (change)="upload($event)" formControlName="featureicon"  #fileInput type="file" id="file">
+                  <div class="progress" style="margin-top: 8px;">
+                    
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+               </div>
+                  </div>
+                  <div class="col-md-6">
+                  <div *ngIf="downloadURL | async; let downloadSrc" >
+                      <!-- File uploaded: <a  #featureicon="ngModel" name="featureicon" [(ngModel)]="service.formData.featureicon" [href]="downloadSrc">{{downloadSrc}}</a> -->
+                      <img  style="width:35px" src="{{downloadSrc}}">           
+                     <span style="display: none;" id="featureicon">{{downloadSrc}}</span>
+                    
+                    </div>
+                   <!--  <input type="hidden"  formControlName="featureicon"   placeholder="Fesature"> -->
+                  </div>        
+                  <div class="col-md-6">
+
+                    <div class="controles-container">
+                      <div class="add-bottom-padding">
+                        <mat-checkbox matInput formControlName="active">Active</mat-checkbox>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+
+              </mat-grid-list>
+              <span *ngIf="showerrorExists" style="color:red;    font-size: 11px;
+              font-weight: bold;"> 
+                Record Already Exists
+              </span>
+              <div class="row" style="padding: 5%;">
+                <div>
+                  <div class="row rqd" style="font-size: 11px; padding-left: 16px;"> *Required Fields</div>
+                  <button mat-raised-button color="primary" type="submit">Submit</button>
+                  <button mat-raised-button color="warn" style="margin-left: 6px;" (click)="onClear()">Clear</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

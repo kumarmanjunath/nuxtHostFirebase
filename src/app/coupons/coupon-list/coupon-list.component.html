@@ -1,0 +1,152 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="container">
+      <div class="row">
+          
+          <div class="col-lg-12">  
+              <div class="search-div">
+                  <div class="row">
+                    <div class="col-lg-4" style="padding-right:2px;">
+                      <mat-form-field class="search-form-field" floatLabel="never">
+                        <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-4" style="text-align:right;">
+                      <form [formGroup]="service.frm">
+                      <div class="row">
+                        <div class="col-lg-6">
+                     
+                       
+                          <mat-form-field>
+                          <mat-select formControlName="isactive" placeholder="Select Status"
+                          style="font-size: 14px;" (selectionChange)="radioChange($event)" required>
+                          <mat-option value="0" >All</mat-option>
+                          <mat-option value="1">Active</mat-option>
+                          <mat-option value="2">Inactive</mat-option>
+                          </mat-select>
+                        </mat-form-field>                  
+                      </div>
+                      <div class="col-lg-6">
+                          <mat-form-field>
+                          <mat-select formControlName="isltype" placeholder="Select Type"
+                          style="font-size: 14px;" (selectionChange)="radioChange($event)" required>
+                          <mat-option value="0" >All</mat-option>
+                          <mat-option value="1">Luxury</mat-option>
+                          <mat-option value="2">Premium</mat-option>
+                          </mat-select>
+                        </mat-form-field>   
+                      </div>
+                    </div>               
+                       
+                      </form>
+                    </div>
+               
+                    
+           
+              <div class="col-lg-2">
+                  <button mat-raised-button style="color: #fafafa;background: linear-gradient(60deg, #f44336, rgba(210, 21, 21, 0.87));width: 90%;padding: 3px;" (click)="onCreate()">
+                    <mat-icon>add</mat-icon>Create
+                  </button>
+                </div>
+              </div>
+              </div>
+          <div class="card" style="margin-top: 8px;">
+              <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon" style="background: linear-gradient(60deg, #1c32ad, #3f51b5);">
+                  <i class="material-icons">assignment</i>
+                </div>
+                <h4 class="card-title ">Coupons Table</h4>
+              </div>
+              <div class="card-body">
+
+
+
+<div>
+  <mat-table [dataSource]="listData"  matSort>
+
+      <ng-container matColumnDef="slno">
+          <mat-header-cell *matHeaderCellDef >#</mat-header-cell>
+          <mat-cell *matCellDef="let element; let j = index"> 
+            {{ (j+1) + (myPaginator.pageIndex * myPaginator.pageSize) }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="ltype">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Type</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.ltype}}</mat-cell>
+        </ng-container>
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Code</mat-header-cell>
+      <mat-cell *matCellDef="let element" style="font-weight: 500;">{{element.code}}</mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="discount">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Discount(%)</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.discount}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="discountAmt">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Discount Amt</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.discountAmt}}</mat-cell>
+    </ng-container>
+   
+    <ng-container matColumnDef="startdate">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Start Date</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.startdate.seconds * 1000 | date:'dd-MMM-yyyy' }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="enddate">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>End Date</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.enddate.seconds * 1000 | date:'dd-MMM-yyyy' }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>Description</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.description}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="updatedon">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>Updated on</mat-header-cell>
+        <mat-cell *matCellDef="let element" style="font-size: 11px;">{{ element.updatedon.seconds * 1000 | date:'dd-MMM-yyyy hh:mm:ss a' }}</mat-cell>
+      </ng-container>
+    <ng-container matColumnDef="active">
+        <mat-header-cell style="font-size: 13px;" *matHeaderCellDef>Is Active</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.active}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="removedeposit">
+        <mat-header-cell style="font-size: 13px;" *matHeaderCellDef>Deduct Deposit</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.removedeposit}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button  (click)="onEdit(row)"><mat-icon style="color: #2e42b1;">launch</mat-icon></button>
+       <!--  <button mat-icon-button color="warn" (click)="onDelete(row.id)"><mat-icon>delete_outline</mat-icon></button>
+ -->      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator  #myPaginator  [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="25" showFirstLastButtons></mat-paginator>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+            </div>
+          </div>
+      

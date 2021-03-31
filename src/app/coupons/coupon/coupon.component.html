@@ -1,0 +1,100 @@
+<div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-danger">  
+                            <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+                            <h4 class="card-title">Coupon</h4>
+                            <p class="card-category">Enter Coupon Discount</p>
+                        
+                        </div>
+                        <div class="card-body">
+    <form  [formGroup]="service.form" class="normal-form" autocomplete="off" (submit)="onSubmit()">
+      <mat-grid-list cols="2"  rowHeight="350px">
+          <div class="row">
+              <div class="col-md-6">
+        
+          <div class="controles-container">
+              <input type="hidden" formControlName="id">
+            
+                <mat-form-field>
+                  <mat-select formControlName="ltype" placeholder="Select Car Type" required>                        
+                    <ng-container *ngFor="let fuel of this.ltype">
+                      <mat-option value="{{fuel.description}}">{{fuel.description}}</mat-option>
+                    </ng-container>
+                  </mat-select>
+                  <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+
+             
+            <mat-form-field>
+              <input formControlName="code" maxlength="15" matInput placeholder="Code" required>
+              <mat-error>This field is mandatory.</mat-error>
+            </mat-form-field>
+            <div class="add-bottom-padding">
+              For Self drives only<br>
+              <mat-checkbox  matInput  formControlName="deposit">Deduct Deposit</mat-checkbox>
+            </div>
+            <mat-form-field>
+                    <input formControlName="description" matInput placeholder="Description" >
+                   
+                  </mat-form-field>
+                  <mat-radio-group formControlName="optiontype" (change)="service.radioChange($event)"> 
+                    <mat-radio-button *ngFor="let op of service.oplist" [checked]="op.checked" [value]="op.ID">{{ op.name}}</mat-radio-button>
+                  </mat-radio-group>
+                 
+                <!--  <div >
+                    Selected item: {{optiontype}}
+                 </div> -->
+                 
+            
+                      <mat-form-field *ngIf="service.showdiscount">
+                        <input formControlName="discount" maxlength="2"  matInput placeholder="Discount %" required>
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+                      <mat-form-field *ngIf="service.showdiscountamt">
+                        <input formControlName="discountAmt" matInput placeholder="Discount amt" required>
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+     </div>
+    
+    </div>
+        <div class="col-md-6">
+             
+                <div class="controles-container">                   
+                        <mat-form-field>
+                                <input formControlName="startdate" matInput [matDatepicker]="picker" placeholder="Start Date">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                              <mat-form-field>
+                                    <input  formControlName="enddate" matInput [matDatepicker]="spicker" placeholder="End Date">
+                                    <mat-datepicker-toggle matSuffix [for]="spicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #spicker></mat-datepicker>
+                                  </mat-form-field>
+                  <div class="add-bottom-padding">
+                    <mat-checkbox  matInput  formControlName="active">Active</mat-checkbox>
+                  </div>
+                  
+                </div>
+           
+            </div>
+          </div>
+       
+      </mat-grid-list>
+      <div class="row" style="padding: 5%;padding-top: 0px;"><div >
+          <div class="row rqd" style="font-size: 11px; padding-left: 16px;">    *Required Fields</div>
+          <button mat-raised-button color="primary" type="submit" >Submit</button>
+          <button mat-raised-button color="warn" style="margin-left: 6px;" (click)="onClear()">Clear</button>
+               </div></div>
+    </form>
+      </div>
+                  </div>
+              </div>
+             
+          </div>
+      </div>
+    </div>
+    
+    

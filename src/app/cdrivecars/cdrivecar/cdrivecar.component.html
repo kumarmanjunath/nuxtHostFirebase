@@ -1,0 +1,262 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger" style="background: linear-gradient(60deg, #172675, #3f51b5);">
+            <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+            <h4 class="card-title">Chauffeur driven/Airport Car <span class="card-category" style="font-size: 13px;">- Enter Car you want</span></h4>
+
+          </div>
+          <div class="card-body">
+            <form [formGroup]="service.form" class="normal-form" autocomplete="off" (submit)="onSubmit()">
+              <mat-grid-list cols="2">
+                <div class="row">
+
+                  <input type="hidden" formControlName="id">
+                  <div class="col-md-2">
+                    <mat-form-field>
+                      <mat-select formControlName="ltype" placeholder="Select Car Type"  (selectionChange)="getbrand($event.value)" required>                        
+                        <ng-container *ngFor="let fuel of this.ltype">
+                          <mat-option value="{{fuel.description}}">{{fuel.description}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+ 
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <mat-select formControlName="carbrand" placeholder="Select Brand"
+                        (selectionChange)="getclassname($event.value)" required>
+                        <mat-option>None</mat-option>
+                       <!--  <ng-container *ngFor="let carfleet of carbrandservice.arraybrand">
+                          <mat-option value="{{carfleet.brand}}">{{carfleet.brand}}</mat-option>
+                        </ng-container> -->
+                        <ng-container *ngFor="let carfleet of carbrandservice.array">
+                          <mat-option value="{{carfleet.description}}">{{carfleet.description}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <mat-select formControlName="carclass" placeholder="Select Class"
+                        (selectionChange)="getfleet($event.value)" required>
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let carfleet of carfleetservice.arrayclass">
+                          <mat-option value="{{carfleet.class}}">{{carfleet.class}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-2">
+                    <ng-container *ngFor="let carfleet of carfleetservice.arrayfleet">
+                      <img src="{{carfleet.imgcar}}" style="height: 45px;" />
+                      <input formControlName="imgcar" matInput style=" font-size: 1px;" [(ngModel)]="carfleet.imgcar" value="{{carfleet.imgcar}}" >
+        
+                    </ng-container>
+                  </div>
+                  <div class="col-md-2">
+                    <ng-container *ngFor="let carfleet of carfleetservice.arrayfleet">
+                      <img src="{{carfleet.imgcarmob}}" style="height: 45px;" />
+                      <input formControlName="imgcarmob" matInput style=" font-size: 1px;" [(ngModel)]="carfleet.imgcarmob" value="{{carfleet.imgcarmob}}" >
+        
+                    </ng-container>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <mat-select formControlName="location" placeholder="Select Location"
+                        (selectionChange)="getagent($event.value)" required>
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let location of locationservice.array">
+                          <mat-option value="{{location.description}}">{{location.description}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label>Select Agents</mat-label>
+                          <mat-select formControlName="agent_name" required multiple>
+                            <mat-option  *ngFor="let agent of agentservice.array" [value]="agent.fullname">{{agent.fullname}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                  </div>
+
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <input formControlName="color" matInput placeholder="Enter Color">
+                    
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <input type="number" formControlName="launch_year" matInput placeholder="Enter Launch Year"
+                        >
+                    
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-9 bd">1. Full Day</div>
+                  <div class="col-md-3 bd">
+                    <mat-checkbox matInput formControlName="active1">Active</mat-checkbox>
+                  </div>
+
+                  <div class="row" style="padding: 0px 10px;" *ngIf="service.form.get('active1').value == true">
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <input type="number" formControlName="price1" matInput placeholder="Price" required>
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <input type="number" formControlName="package_hours1" matInput placeholder="Package Hours"
+                          required>
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <input type="number" formControlName="package_kms1" matInput placeholder="Package Kms" required>
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+                    </div>
+             <!--        <div class="col-md-2">
+                      <mat-form-field>
+                        <input type="number" formControlName="extra_km_charge1" matInput placeholder="Extra Km Charge"
+                          required>
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-2">
+                      <mat-form-field>
+                        <input type="number" formControlName="extra_hour_charge1" matInput
+                          placeholder="Extra Hour Charge" required>
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-2">
+                      <mat-form-field>
+                        <input type="number" formControlName="driver_allowance1" matInput placeholder="Driver Allowance"
+                          required>
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+                    </div> -->
+                  </div>
+
+
+
+                  <div class="col-md-9 bd">2. Outstation</div>
+                  <div class="col-md-3 bd">
+                    <mat-checkbox matInput formControlName="active2">Active</mat-checkbox>
+                  </div>
+                
+                <div class="row" style="padding: 0px 10px;" *ngIf="service.form.get('active2').value == true"> 
+
+                  <div class="col-md-4">
+                    <mat-form-field>
+                      <input type="number" formControlName="price2" matInput placeholder="Price" required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+
+                  </div>
+
+                  <div class="col-md-4">
+                    <mat-form-field>
+                      <input formControlName="package_hrs2" matInput placeholder="Package Hours" required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field>
+                      <input type="number" formControlName="package_kms2" matInput placeholder="Package Kms" required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+       <!--            <div class="col-md-2">
+                    <mat-form-field>
+                      <input type="number" formControlName="extra_km_charge2" matInput placeholder="Extra Km Charge"
+                        required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-2">
+                    <mat-form-field>
+                      <input type="number" formControlName="driver_allowance2" matInput placeholder="Driver Allowance"
+                        required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div> -->
+                </div>
+                  <div class="col-md-9 bd">3. Airport</div>
+                  <div class="col-md-3 bd">
+                    <mat-checkbox matInput formControlName="active3">Active</mat-checkbox>
+                  </div>
+               
+                <div class="row" style="padding: 0px 10px;" *ngIf="service.form.get('active3').value == true"> 
+
+                  <div class="col-md-4">
+                    <mat-form-field>
+                      <input type="number" formControlName="price3" matInput placeholder="Price" required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field>
+                      <input type="number" formControlName="toll" matInput placeholder="Toll Charges" required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field>
+                      <input type="number" formControlName="parking_fee" matInput placeholder="Parking Fee" required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+                <!--   <div class="col-md-2">
+                    <mat-form-field>
+                      <input type="number" formControlName="driver_allowance3" matInput placeholder="Driver Allowance"
+                        required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div> -->
+                </div>
+
+
+                  <div class="col-md-8">
+
+                    <div class="add-bottom-padding">
+                      <mat-checkbox matInput formControlName="active">Car Active</mat-checkbox>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="row" style="padding: 5%;">
+                      <div>
+                        <div class="row rqd" style="font-size: 11px; padding-left: 16px;"> *Required Fields</div>
+                        <button mat-raised-button color="primary" type="submit">Submit</button>
+                        <button mat-raised-button color="warn" style="margin-left: 6px;"
+                          (click)="onClear()">Clear</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </mat-grid-list>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

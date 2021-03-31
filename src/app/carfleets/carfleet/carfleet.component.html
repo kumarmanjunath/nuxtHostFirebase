@@ -1,0 +1,183 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger" style="background: linear-gradient(60deg, #172675, #3f51b5);">
+            <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+            <h4 class="card-title">Car Fleet <span class="card-category" style="font-size: 13px;">- Enter Cars you
+                want</span></h4>
+
+          </div>
+          <div class="card-body">
+              <div class="row">
+
+              <div class="col-md-3">
+
+                  <div class="add-bottom-padding">
+                      <button mat-raised-button color="primary" (click)="onImageClick('landing')">Web Landing Image</button> 
+                      
+                  </div>
+                  
+                </div>
+                <div class="col-md-1">
+
+                  <div class="add-bottom-padding">
+                      <img style="max-height: 40px;" src="{{service.landingimg}}"> 
+                  </div>
+                </div>
+             
+                <div class="col-md-3">
+
+                  <div class="add-bottom-padding">
+                     
+                        <button mat-raised-button color="primary" (click)="onImageClick('landingmob')">App Landing Image 
+                        </button> 
+                  </div>
+                  
+                </div>
+                <div class="col-md-2">
+
+                  <div class="add-bottom-padding">
+                      <img style="max-height: 40px;" src="{{service.landingimgmob}}"> 
+                  </div>
+                </div>
+                <div class="col-md-3" style="text-align: right;">
+
+                    <div class="add-bottom-padding">
+                        <button mat-raised-button color="primary" (click)="onImageClick('slider')">Slider Image 
+                          </button> 
+                    </div>
+                  </div>
+                </div>
+            <form [formGroup]="service.form" class="normal-form" autocomplete="off" (submit)="onSubmit()">
+              <mat-grid-list cols="2">
+                <div class="row">
+
+                  <input type="hidden" formControlName="id">
+                  <div class="col-md-2">
+                    <mat-form-field>
+                      <mat-select formControlName="ltype" placeholder="Select Car Type" (selectionChange)="getbrand($event.value)" required>                        
+                        <ng-container *ngFor="let fuel of this.ltype">
+                          <mat-option value="{{fuel.description}}">{{fuel.description}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+ 
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <mat-select formControlName="brand" placeholder="Select Brand" required>
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let carbrand of carbrandservice.array">
+                          <mat-option value="{{carbrand.description}}">{{carbrand.description}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <input formControlName="class" matInput placeholder="Enter Class" required>
+
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+               
+                    <div class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>Select Features</mat-label>
+                        <mat-select formControlName="features" multiple required>
+                          <mat-option  *ngFor="let carfeature of carfeatureservice.featurearray" [value]="carfeature.description">{{carfeature.description}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <mat-select formControlName="fuel" placeholder="Select FuelType" required>
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let fuel of this.fueltype">
+                          <mat-option value="{{fuel.description}}">{{fuel.description}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <mat-select formControlName="gear" placeholder="Select Gear" required>
+                        <mat-option>None</mat-option>
+
+                        <mat-option value="Automatic">Automatic</mat-option>
+                        <mat-option value="Manual">Manual</mat-option>
+                      </mat-select>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <input type="number" formControlName="lugguage" matInput placeholder="Enter Lugguage" required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <input type="number" formControlName="seat" matInput placeholder="Enter Seat" required>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                 
+                  <div class="col-md-3">
+
+                    <div class="add-bottom-padding">
+                      <mat-checkbox matInput formControlName="active">Active</mat-checkbox>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                  <div class="row">
+
+                      <div class="col-md-2" *ngFor="let item of service.imgsliderarr" >
+
+                          <div class="add-bottom-padding">
+                              <img style="max-height: 40px;" src="{{item}}"> 
+                          </div>
+                        </div>
+                        
+                    </div>
+                  </div>
+                 
+                  <div class="col-md-4">
+                    <div class="row" style="padding: 5%;">
+                      <div>
+                        
+                          <span *ngIf="showimageerrorExists" style="color:red;    font-size: 11px;
+                          font-weight: bold;"> 
+                           Please select Landing / Slider Image
+                          </span>
+                         <span *ngIf="showerrorExists" style="color:red;    font-size: 11px;
+                         font-weight: bold;"> 
+                           Record Already Exists
+                         </span>
+                        <div class="row rqd" style="font-size: 11px; padding-left: 16px;"> *Required Fields</div>
+                        <button mat-raised-button color="primary" type="submit">Submit</button>
+                        <button mat-raised-button color="warn" style="margin-left: 6px;"
+                          (click)="onClear()">Clear</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </mat-grid-list>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

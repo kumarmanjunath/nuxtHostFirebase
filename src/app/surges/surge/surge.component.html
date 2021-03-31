@@ -1,0 +1,149 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+                      <h4 class="card-title">Surge  </h4>
+                    <!--   <p class="card-category">Modify  Configuration</p> -->
+                  
+                  </div>
+                  <div class="card-body">
+<form #form="ngForm" autocomplete="off" >
+<mat-grid-list cols="2"  rowHeight="310px">
+    <div class="row">
+      <div class="col-md-12 bd">VIP</div>
+        <div class="col-md-4">
+  
+            <div class="controles-container">
+                <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+             
+              <mat-form-field>
+               <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+                -->  
+              
+                <input type="number" name="cd" matInput #cd="ngModel" [(ngModel)]="service.formData.cd" placeholder="CD Surge" required>
+         
+                <mat-error>This field is mandatory.</mat-error>
+              </mat-form-field>
+             
+        </div>
+        
+        </div>
+            <div class="col-md-4">
+       
+                    <div class="controles-container">
+                      <mat-form-field>
+                     
+                        <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+                         -->  
+                         
+                         <input type="number" name="sd" matInput #sd="ngModel" [(ngModel)]="service.formData.sd" placeholder="SD Surge" required>
+                  
+                         <mat-error>This field is mandatory.</mat-error>
+                       </mat-form-field>
+                      
+                    </div>
+               
+                </div>
+               
+       
+<div class="col-md-4">
+       
+        <div class="controles-container">
+          <mat-form-field>
+            <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+             -->  
+             <input type="number" name="ap" matInput #ap="ngModel" [(ngModel)]="service.formData.ap" placeholder="AT Surge" required>
+      
+             <mat-error>This field is mandatory.</mat-error>
+           </mat-form-field>
+          
+        </div>
+   
+    </div>
+
+
+    <div class="col-md-12 bd">Premium</div>
+    <div class="col-md-4">
+  
+      <div class="controles-container">
+          <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+        
+        <mat-form-field>
+         <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+          -->  
+        <!--   <span style=" font-size: 10px;color: blue;position: absolute;
+                         top: -27px;margin-left: -6px;">Premium</span> -->
+          <input type="number" name="luxcd" matInput #luxcd="ngModel" [(ngModel)]="service.formData.luxcd" placeholder="CD Surge" required>
+   
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+       
+  </div>
+  
+  </div>
+      <div class="col-md-4">
+ 
+              <div class="controles-container">
+                <mat-form-field>
+                  <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+                   -->  
+                   <input type="number" name="luxsd" matInput #luxsd="ngModel" [(ngModel)]="service.formData.luxsd" placeholder="SD Surge" required>
+            
+                   <mat-error>This field is mandatory.</mat-error>
+                 </mat-form-field>
+                
+              </div>
+         
+          </div>
+         
+ 
+<div class="col-md-4">
+ 
+  <div class="controles-container">
+    <mat-form-field>
+      <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+       -->  
+       <input type="number" name="luxat" matInput #luxat="ngModel" [(ngModel)]="service.formData.luxat" placeholder="AT Surge" required>
+
+       <mat-error>This field is mandatory.</mat-error>
+     </mat-form-field>
+    
+  </div>
+
+</div>
+
+<div class="col-md-12 bd">Yacht</div>
+    <div class="col-md-4">
+       
+        <div class="controles-container">
+          <mat-form-field>
+            <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+             -->  
+             <input type="number" name="yachtsurge" matInput #yachtsurge="ngModel" [(ngModel)]="service.formData.yachtsurge" placeholder="Yacht" required>
+      
+             <mat-error>This field is mandatory.</mat-error>
+           </mat-form-field>
+          
+        </div>
+   
+    </div>
+    
+    </div>
+ 
+</mat-grid-list>
+<div class="row" style="padding: 5%;"><div >
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="onSubmit(form)">Submit</button>
+    <button mat-raised-button color="warn" style="margin-left: 6px;" (click)="onClear(form)">Clear</button>
+</div></div>
+</form>
+</div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+</div>
+

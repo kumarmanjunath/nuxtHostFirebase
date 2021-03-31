@@ -1,0 +1,75 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+            <h4 class="card-title">Brand</h4>
+            <p class="card-category">Enter Car Brands you want</p>
+
+          </div>
+          <div class="card-body">
+            <form [formGroup]="service.form" class="normal-form" autocomplete="off" (submit)="onSubmit()">
+              <mat-grid-list cols="2" style="padding-top: 4%;" rowHeight="150px">
+                <div class="row">
+                  <div class="col-md-4">
+                    <mat-form-field>
+                      <mat-select formControlName="ltype" placeholder="Select Car Type" required>                        
+                        <ng-container *ngFor="let fuel of this.ltype">
+                          <mat-option value="{{fuel.description}}">{{fuel.description}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+ 
+                  </div>
+                  <div class="col-md-4">
+
+                    <div class="controles-container">
+                      <input type="hidden" formControlName="id">
+                      <input type="hidden" formControlName="hdescription">
+                      <input type="hidden" formControlName="hactive">
+                      <mat-form-field>
+                        <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+          -->
+                        <input formControlName="description" matInput required>
+
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+
+                    </div>
+
+                  </div>
+                  <div class="col-md-4">
+
+                    <div class="controles-container">
+                      <div class="add-bottom-padding">
+                        <mat-checkbox matInput formControlName="active">Active</mat-checkbox>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+
+              </mat-grid-list>
+              <span *ngIf="showerrorExists" style="color:red;    font-size: 11px;
+              font-weight: bold;"> 
+                Record Already Exists
+              </span>
+              <div class="row" style="padding: 5%;">
+                <div>
+                  <div class="row rqd" style="font-size: 11px; padding-left: 16px;"> *Required Fields</div>
+                  <button mat-raised-button color="primary" type="submit">Submit</button>
+                  <button mat-raised-button color="warn" style="margin-left: 6px;" (click)="onClear()">Clear</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

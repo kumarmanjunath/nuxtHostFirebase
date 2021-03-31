@@ -1,0 +1,145 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="container">
+      <div class="row">
+          
+          <div class="col-lg-12">  
+            <div class="search-div">
+              <div class="row">
+              
+          <div class="col-lg-5" style="padding-right:2px;">
+            <mat-form-field class="search-form-field" floatLabel="never">
+              <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+              <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-5">
+            <form  [formGroup]="form">
+            <div class="row" >
+              <div class="col-lg-7">
+            <mat-form-field>
+              <mat-select formControlName="datetype"  placeholder="Select Date Search"
+                (selectionChange)="showdatepicker($event.value)" style="font-size: 14px;" required>
+             
+               <!--    <mat-option value="{{fuel.description}}">{{fuel.description}}</mat-option> -->
+                  <mat-option value="1" >Date : From the Beginning</mat-option>
+                  <mat-option value="2">Date : From - To</mat-option>
+               
+              </mat-select>
+              <mat-error>This field is mandatory.</mat-error>
+            </mat-form-field>
+              </div>
+              <div class="col-lg-3" >
+                <div class="add-bottom-padding">
+          
+                    <mat-form-field>
+                      <mat-select formControlName="ctype"  placeholder="Select Type"
+                      style="font-size: 14px;" (selectionChange)="radioChange($event)" >
+                          <mat-option value="Email" >Email</mat-option>
+                          <mat-option value="Mobile">Mobile</mat-option>
+                      </mat-select>                              
+                    </mat-form-field>
+                  </div>
+              </div>
+              <div class="col-md-7">
+                <div class="row" id="rwdate" style="display:none;">
+                  <div class="col-md-6">
+                    <mat-form-field>
+                        <input formControlName="startdate" matInput [matDatepicker]="picker" (dateChange)="updateCalcs($event)" placeholder="From Date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker ></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                      <div class="col-md-6">
+                      <mat-form-field>
+                          <input  formControlName="enddate" matInput [matDatepicker]="spicker" (dateChange)="updateCalcs($event)" placeholder="To Date">
+                          <mat-datepicker-toggle matSuffix [for]="spicker" ></mat-datepicker-toggle>
+                          <mat-datepicker #spicker ></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                </div>
+                </div>
+               
+            </div>
+            
+          </form>
+        </div>    
+        <div class="col-lg-2">
+          <button mat-fab style="color: #fafafa;background: linear-gradient(60deg, #f44336, rgba(210, 21, 21, 0.87));padding: 0px;    margin-left: -12px;" (click)="exportAsXLSX()">
+            <mat-icon>get_app</mat-icon>
+          </button>
+        </div>        
+          </div>
+          </div>
+          <div class="card" style="margin-top: 8px;">
+              <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon" style="background: linear-gradient(60deg, #1c32ad, #3f51b5);">
+                  <i class="material-icons">assignment</i>
+                </div>
+                <h4 class="card-title ">Subscriptions Table</h4>
+              </div>
+              <div class="card-body">
+
+
+
+<div>
+  <mat-table [dataSource]="listData"  matSort>
+
+      <ng-container matColumnDef="slno">
+          <mat-header-cell *matHeaderCellDef >#</mat-header-cell>
+          <mat-cell *matCellDef="let element; let j = index"> 
+            {{ (j+1) + (myPaginator.pageIndex * myPaginator.pageSize) }} </mat-cell>
+        </ng-container>
+        
+    <ng-container matColumnDef="emailid">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Email Id/Mobile</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.emailid}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>City</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.city}}</mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="createdon">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>Subscription Date</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.createdon.seconds * 1000 | date:'dd-MMM-yyyy hh:mm:ss a' }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell  *matCellDef="let row">
+          <button mat-icon-button color="warn"  matTooltip="Delete" (click)="onDelete(row.id)"><mat-icon>delete_outline</mat-icon></button>
+          
+            </mat-cell> 
+        
+      </ng-container> 
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator  #myPaginator  [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="25" showFirstLastButtons></mat-paginator>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+          
+
+            </div>
+          </div>

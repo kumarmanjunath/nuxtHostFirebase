@@ -1,0 +1,366 @@
+/*my-app .main-panel .main-content .card{
+    animation-duration: 750ms;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-fill-mode: forwards;
+}*/
+
+.mat-cell {
+  font-size: 9px!important;
+}
+@media (min-width: 1800px)
+{
+.container {
+    max-width: 1584px;
+}
+}
+.mat-cell {
+  font-size: 12px;
+}
+.mat-dialog-container
+{background:none;
+box-shadow: none;}
+.tim-typo{
+  padding-left: 25%;
+  margin-bottom: 40px;
+  position: relative;
+  width: 100%;
+}
+.mat-table {
+  min-width: auto !important;
+  width: 100% !important;
+}
+
+.mat-header-row {
+  width: 100%;
+}
+
+.mat-row {
+  width: 100%;
+}
+.mat-column-slno {
+/*   flex: 0 0 25% !important; */
+  max-width: 65px !important;
+}
+.mat-column-code
+{
+  /*   flex: 0 0 25% !important; */
+    min-width: 175px !important;
+  }
+.mat-column-email {
+  /*   flex: 0 0 25% !important; */
+    min-width: 250px !important;
+  }
+ 
+
+  .mat-column-actions
+  {
+    
+      max-width: 60px !important;
+    }
+   /*  .mat-header-cell, .mat-cell {
+      display:flex;
+      justify-content:center;
+     }
+     .mat-column-description
+     {
+       display:flex;
+       justify-content:flex-start;
+     } */
+.tim-typo .tim-note{
+  bottom: 5px;
+  color: #c0c1c2;
+  display: block;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  left: 0;
+  margin-left: 20px;
+  position: absolute;
+  width: 260px;
+}
+/* You can add global styles to this file, and also import other style files */
+form.normal-form{
+  margin: 10px;
+}
+
+.controles-container{
+  width: 100%;
+  padding: 5%;    
+}
+
+.controles-container > * {
+  width: 100%;
+  }
+
+  .add-bottom-padding{
+      padding-bottom: 10px;
+  }
+  /* radio group */
+mat-radio-group mat-radio-button{
+  margin-left: 5px;
+}
+
+.button-row button{
+  margin: 5px;
+}
+
+/* notification */
+snack-bar-container.success {
+  background-color: #5cb85c;
+  color : #fff;
+}
+
+
+snack-bar-container.notification simple-snack-bar{
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+
+.hide{
+  display: none;
+}
+
+/* mat-table */
+mat-footer-row mat-footer-cell{
+  justify-content: center;
+  font-style: italic;
+}
+
+/* filter controls */
+
+    .search-form-field{
+        width: 100%;
+        margin-left: 10px;
+        padding: 5px 10px;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        }
+        .search-form-field div.mat-form-field-underline {
+            display: none;
+        }
+        .search-form-field div.mat-form-field-infix{
+            border-top: 0px;
+        }
+        .search-form-field div.mat-form-field-wrapper{
+          padding-bottom: 0px;
+      }
+      .search-form-field div.mat-form-field-suffix button{
+          height: 32px;
+          width: 32px;
+      }
+
+
+      @media (min-width: 992px){
+          .typo-line{
+              padding-left: 140px;
+              margin-bottom: 40px;
+              position: relative;
+          }
+      
+          .typo-line .category{
+              transform: translateY(-50%);
+              top: 50%;
+              left: 0px;
+              position: absolute;
+          }
+      }
+      
+      .all-icons [class*="pe-"]{
+          font-size: 40px;
+      }
+      .all-icons input{
+          border: 0;
+      }
+      .all-icons .font-icon-detail{
+          text-align: center;
+          padding: 45px 0px 30px;
+          border: 1px solid #e5e5e5;
+          border-radius: 6px;
+          margin: 15px 0;
+      }
+      .all-icons .font-icon-detail input{
+          margin: 25px auto 0;
+          width: 100%;
+          text-align: center;
+          display: block;
+          color: #aaa;
+          font-size: 13px;
+      }
+      
+      #map{
+          position:relative;
+          width:100%;
+          height: calc(100% - 60px);
+      }
+      
+      .places-buttons .btn{
+          margin-bottom: 30px
+      }
+      .sidebar .nav > li.active-pro{
+          position: absolute;
+          width: 100%;
+          bottom: 10px;
+      }
+      .sidebar .nav > li.active-pro a{
+          background: rgba(255, 255, 255, 0.14);
+          opacity: 1;
+          color: #FFFFFF;
+      }
+      
+      .table-upgrade td:nth-child(2),
+      .table-upgrade td:nth-child(3){
+          text-align: center;
+      }
+      
+      @media all and (max-width: 991px)  {
+          .sidebar .nav > li.active-pro{
+              position: initial;
+          }
+      }
+
+              /* for dialog pop-up */
+  .btn-dialog-close{
+    width: 45px;
+    min-width: 0px !important;
+    height: 40px;
+    padding: 0px !important;
+  }
+  .confirm-dialog-container {
+    border-radius: .25em .25em .4em .4em;
+    padding: 0px;
+    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+    background: #fff;
+    top: 10px;
+    position: absolute;
+}
+   /* mat-confirm-dialog (customised dialog) */
+   .mat-dialog-container {
+    border-radius: .25em .25em .4em .4em;
+    padding: 0px;
+  
+}
+.confirm-dialog-container .content-container{
+    margin: 5px 5px 15px 5px;
+    color: #8f9cb5;
+    display: flex;
+}
+.confirm-dialog-container #close-icon{
+    margin-left: auto;
+    order: 2;
+    font-weight: bolder;
+}
+.confirm-dialog-container #close-icon:hover{
+cursor: pointer;
+}
+
+.confirm-dialog-container #no-button{
+height: 50px;
+width: 50%;
+background-color: #fc7169;
+color:white;
+border-radius: 0px;
+}
+
+.confirm-dialog-container #yes-button{
+    height: 50px;
+    width: 50%;
+    background-color: #b6bece;
+    color:white;
+    border-radius: 0px;
+}
+
+.confirm-dialog-container span.content-span{
+    padding:  35px 16px;
+    text-align: center;
+    font-size: 20px;
+}
+
+li.active > a {
+  background-color: #027ffd!important;
+}
+.search-div button
+{
+  background: linear-gradient(60deg, #027ffd, #0572e0)!important;
+  background-image: linear-gradient(60deg, rgb(2, 127, 253), rgb(5, 114, 224))!important;
+}
+.card-icon
+{
+  background:linear-gradient(60deg, #999999, #333333e0)!important;
+}
+.mat-cell .mat-icon
+{
+  color:#027ffd!important;
+}
+.mat-button-wrapper
+{
+  font-family: TTCommons;
+}
+.card-icon
+{
+  padding: 2px!important;
+    background: black!important;
+}
+
+.card-header-danger
+{
+  background:rgb(21, 21, 21)!important;
+}
+.mat-raised-button.mat-primary
+{
+  background-color:#027ffd;
+}
+@font-face {
+  font-family: 'TTCommonsRegular';
+  src: url('TTCommons-Regular.woff')  format('truetype');
+} 
+@font-face {
+  font-family: 'TTCommons'; 
+  src: url('TTCommons-Medium.woff')  format('truetype');
+}
+@font-face {
+  font-family: 'TTCommonsDemiBold';
+  src: url('TTCommons-DemiBold.woff')  format('truetype');
+}
+@font-face {
+  font-family: 'TTCommonsBold';
+  src: url('TTCommons-Bold.woff')  format('truetype');
+}
+.mat-cell, .card-body , .mat-form-field-wrapper, .mat-select, .navbar-brand, .btn-link
+{
+ 
+  font-family: TTCommons!important;
+
+}
+.card-title ,.nav-item
+{
+  font-family: TTCommonsBold!important;
+
+}
+.btn-link
+{
+  color:#027ffd!important;
+}
+/* .mat-button-wrapper .mat-icon{
+  color:white!important;
+} */
+
+.simple-text
+{
+  font-family: ttcommonsdemibold;
+  color: #0473e2;
+}
+.main-panel .main-content {
+  margin-top: 36px;
+}
+.mat-header-row, .search-div
+{
+ 
+  font-family: TTCommonsDemiBold!important;
+
+}
+div.cdk-overlay-container
+{
+  background-color:transparent;
+}

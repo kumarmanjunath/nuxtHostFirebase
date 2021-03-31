@@ -1,0 +1,107 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="container">
+      <div class="row">
+          
+          <div class="col-lg-12">  
+             
+          <div class="card" style="margin-top: 8px;">
+              <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon" style="background: linear-gradient(60deg, #1c32ad, #3f51b5);">
+                  <i class="material-icons">assignment</i>
+                </div>
+                <h4 class="card-title ">Modify Surge </h4>
+              </div>
+              <div class="card-body">
+
+
+
+<div>
+  <mat-table [dataSource]="listData"  matSort>
+
+      <ng-container matColumnDef="slno">
+          <mat-header-cell *matHeaderCellDef >#</mat-header-cell>
+          <mat-cell *matCellDef="let element; let j = index"> 
+            {{ (j+1) + (myPaginator.pageIndex * myPaginator.pageSize) }} </mat-cell>
+        </ng-container>
+       
+         
+    <ng-container matColumnDef="cd">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header><span style=" font-size: 10px;color: blue;position: absolute;
+        top: 16px;margin-left: -6px;">VIP</span>CD Surge</mat-header-cell>
+      <mat-cell *matCellDef="let element" style="font-weight: 500;">{{element.cd}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sd">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>SD Surge</mat-header-cell>
+      <mat-cell *matCellDef="let element" style="font-weight: 500;">{{element.sd}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ap">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>AT Surge</mat-header-cell>
+        <mat-cell *matCellDef="let element" style="font-weight: 500;">{{element.ap}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="luxcd">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header><span style=" font-size: 10px;color: blue;position: absolute;
+          top: 16px;margin-left: -6px;">Premium</span>CD Surge</mat-header-cell>
+        <mat-cell *matCellDef="let element" style="font-weight: 500;">{{element.luxcd}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="luxsd">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>SD Surge</mat-header-cell>
+        <mat-cell *matCellDef="let element" style="font-weight: 500;">{{element.luxsd}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="luxat">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>AT Surge</mat-header-cell>
+          <mat-cell *matCellDef="let element" style="font-weight: 500;">{{element.luxat}}</mat-cell>
+        </ng-container>
+
+
+      <ng-container matColumnDef="yachtsurge">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>Yacht</mat-header-cell>
+        <mat-cell *matCellDef="let element" style="font-weight: 500;">{{element.yachtsurge}}</mat-cell>
+      </ng-container>
+     
+      <ng-container matColumnDef="updated_on">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Updated on</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.updated_on.seconds * 1000 | date:'dd-MMM-yyyy hh:mm:ss a' }}</mat-cell>
+        </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button  (click)="onEdit(row)"><mat-icon style="color: #2e42b1;">launch</mat-icon></button>
+             </mat-cell>
+    </ng-container>
+
+
+
+
+    
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator  #myPaginator  [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+          
+
+            </div>
+          </div>
+      

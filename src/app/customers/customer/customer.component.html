@@ -1,0 +1,59 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+            <h4 class="card-title">Edit</h4>
+            <p class="card-category">Amex Coupon Code 25% Discount</p>
+
+          </div>
+          <div class="card-body">
+            <form [formGroup]="service.form" class="normal-form" autocomplete="off" (submit)="onSubmit()">
+              <mat-grid-list cols="2" style="padding-top: 4%;" rowHeight="150px">
+                <div class="row">
+                  <div class="col-md-6">
+
+                    <div class="controles-container">
+                      <input type="hidden" formControlName="id">
+                      <mat-form-field>
+                        <!--  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+          -->
+                        <input formControlName="couponcode" matInput required>
+
+                        <mat-error>This field is mandatory.</mat-error>
+                      </mat-form-field>
+
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="controles-container">
+                      <div class="add-bottom-padding">
+                       
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+
+              </mat-grid-list>
+            
+              <div class="row" style="padding: 5%;">
+                <div>
+                  <div class="row rqd" style="font-size: 11px; padding-left: 16px;"> *Required Fields</div>
+                  <button mat-raised-button color="primary" type="submit">Submit</button>
+                  <button mat-raised-button color="warn" style="margin-left: 6px;" (click)="onClear()">Clear</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

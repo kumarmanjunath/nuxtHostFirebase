@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="card">
+      <div class="card-header">
+        Firebase Cloud Storage & Angular 5
+      </div>
+      <div class="card-body">
+      
+          <div id="interest">
+          
+              <div class="interest-list">
+          
+                  <form [formGroup]="interestFormGroup" (ngSubmit)="submit()">
+          
+                      <div *ngFor="let interest of interests; let i = index" >
+                          <mat-checkbox class="example-margin" 
+                          (change)="onChange($event)" [checked]="interestFormGroup.get('interests').value.indexOf(interest) > -1" [value]="interest">{{interest}}</mat-checkbox>
+                      </div>
+          
+                      <button>Submit</button>
+                  </form>
+          
+              </div>
+          
+          </div>
+          
+          <pre>{{ interestFormGroup.value | json }}</pre>
+      </div>
+    </div>
+  </div>

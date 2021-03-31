@@ -1,0 +1,163 @@
+<div class="logo">
+    <a href="https://www.creative-tim.com" class="simple-text">
+        <div class="logo-img">
+            <img src="/assets/img/rag.jpg"/>
+        </div><br>
+       <div style="font-size: 12px;"> Hype Admin</div>
+    </a>
+</div>
+<div class="sidebar-wrapper">
+  <div *ngIf="isMobileMenu()">
+ 
+    <ul class="nav navbar-nav nav-mobile-menu">
+        <li class="nav-item">
+            <a class="nav-link" href="#pablo">
+                <i class="material-icons">dashboard</i>
+                <p>
+                    <span class="d-lg-none d-md-block">Stats</span>
+                </p>
+            </a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons">notifications</i>
+                <span class="notification">5</span>
+                <p>
+                    <span class="d-lg-none d-md-block">Some Actions</span>
+                </p>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                <a class="dropdown-item" href="#">Another Notification</a>
+                <a class="dropdown-item" href="#">Another One</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="authService.SignOut()">
+                  
+                <i class="material-icons">person</i>
+                <p>
+                    <span class="d-lg-none d-md-block">Account</span>
+                </p>
+               
+            </a>
+        </li>
+    </ul>
+  </div>
+    <ul class="nav">
+            <li routerLinkActive="active" *ngFor="let dItem of dItems" class="{{dItem.class}} nav-item">
+           
+                    <a class="nav-link" [routerLink]="[dItem.path]">
+                        <i class="material-icons">{{dItem.icon}}</i>
+                        <p>{{dItem.title}}</p>
+                    </a>
+                </li>               
+        <li class="nav-item" routerlinkactive="active">
+             
+        <a class="nav-link" data-toggle="collapse" href="#masters" class="nav-link collapsed" aria-expanded="false">
+            <i class="material-icons">library_books</i>
+            <p>Masters<b class="caret"></b></p>
+        </a>
+        <div class="collapse" id="masters"><ul class="nav">
+           
+
+            <li routerLinkActive="active" *ngFor="let masterItem of masterItems" class="{{masterItem.class}} nav-item">
+           
+                    <a class="nav-link" [routerLink]="[masterItem.path]">
+                            <span class="sidebar-mini">{{masterItem.span}}</span>
+                            <span class="sidebar-normal">{{masterItem.title}}</span>
+                    </a>
+                </li>
+        </ul>
+        </div> 
+    </li>
+  
+
+   
+    <li class="nav-item" routerlinkactive="active">
+             
+        <a class="nav-link" data-toggle="collapse" href="#cars" class="nav-link collapsed" aria-expanded="false">
+            <i class="material-icons">location_on</i>
+            <p>Cars<b class="caret"></b></p>
+        </a>
+        <div class="collapse" id="cars"><ul class="nav">
+           
+
+            <li routerLinkActive="active" *ngFor="let cItem of cItems" class="{{cItem.class}} nav-item">
+           
+                    <a class="nav-link" [routerLink]="[cItem.path]">
+                            <span class="sidebar-mini">{{cItem.span}}</span>
+                            <span class="sidebar-normal">{{cItem.title}}</span>
+                    </a>
+                </li>
+        </ul>
+        </div> 
+    </li>
+    <li class="nav-item" routerlinkactive="active">
+             
+        <a class="nav-link" data-toggle="collapse" href="#bookings" class="nav-link collapsed" aria-expanded="false">
+            <i class="material-icons">notifications</i>
+            <p>Bookings<b class="caret"></b></p>
+        </a>
+        <div class="collapse" id="bookings"><ul class="nav">
+           
+
+            <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+           
+                    <a class="nav-link" [routerLink]="[menuItem.path]">
+                            <span class="sidebar-mini">{{menuItem.span}}</span>
+                            <span class="sidebar-normal">{{menuItem.title}}</span>
+                    </a>
+                </li>
+        </ul>
+        </div> 
+    </li>
+    <li class="nav-item" routerlinkactive="active">
+             
+        <a class="nav-link" data-toggle="collapse" href="#yachtbookings" class="nav-link collapsed" aria-expanded="false">
+            <i class="material-icons">notifications</i>
+            <p>Yacht<b class="caret"></b></p>
+        </a>
+        <div class="collapse" id="yachtbookings"><ul class="nav">
+           
+
+            <li routerLinkActive="active" *ngFor="let menuItem of yachtitems" class="{{menuItem.class}} nav-item">
+           
+                    <a class="nav-link" [routerLink]="[menuItem.path]">
+                            <span class="sidebar-mini">{{menuItem.span}}</span>
+                            <span class="sidebar-normal">{{menuItem.title}}</span>
+                    </a>
+                </li>
+        </ul>
+        </div> 
+    </li>
+    <li class="nav-item" routerlinkactive="active">
+             
+            <a class="nav-link" data-toggle="collapse" href="#tables" class="nav-link collapsed" aria-expanded="false">
+                <i class="material-icons">bubble_chart</i>
+                <p>Settings<b class="caret"></b></p>
+            </a>
+            <div class="collapse" id="tables"><ul class="nav">
+               
+    
+                <li routerLinkActive="active" *ngFor="let sItem of sItems" class="{{sItem.class}} nav-item">
+               
+                        <a class="nav-link" [routerLink]="[sItem.path]">
+                                <span class="sidebar-mini">{{sItem.span}}</span>
+                                <span class="sidebar-normal">{{sItem.title}}</span>
+                        </a>
+                    </li>
+            </ul>
+            </div> 
+        </li>
+       <!--  <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+           
+            <a class="nav-link" [routerLink]="[menuItem.path]">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li> -->
+    </ul>
+</div>

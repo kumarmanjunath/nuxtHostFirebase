@@ -1,0 +1,16 @@
+h6{
+text-transform: capitalize;
+font-weight: 600;
+margin-right: 10px;}
+hr{    
+    border-top: 1px solid white;}
+    .mat-cell, .mat-footer-cell {
+        font-size: 13px;
+    }
+.cdk-textarea-autosize
+    {
+        min-height: 274px!important;
+    }
+    .mat-dialog-container {
+        max-width: 500px!important;
+    }

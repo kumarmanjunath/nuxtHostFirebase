@@ -1,0 +1,35 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+              <div class="col-md-12">
+                  <div class="card ">
+                      <div class="card-header ">
+                              <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+                  
+                 <!--          <h4 class="card-title" style="text-align: center;">Are  you sure you want to proceed? Ensure you have collected the payment</h4> --></div>
+                          <div class="card-body">
+                            <form  [formGroup]="service.smsform" class="normal-form" autocomplete="off" (submit)="onSubmit()">
+                             <div>  <h4 class="card-title" style="text-align: center;">Are  you sure you want to proceed? Ensure you have collected the payment</h4>
+                            <h5 style="    font-size: 0.8rem;
+                            font-weight: 700;text-align: center;"
+                            >This will trigger emails and SMS to all the concerned parties including the customer.</h5>
+                            </div>
+                            <div class="row" style="text-align: center;display: block;">
+                              Customer Name: {{service.smscusname}}<br>
+                             Amount:  {{service.amount}}
+                            </div>
+                              <div class="row" style="padding: 5%;text-align: center;display: block;"><div >
+                                 
+                                  <button mat-raised-button color="primary" type="submit" >Yes</button>
+                                  <button mat-raised-button color="warn" style="margin-left: 6px;" (click)="onClear()">No</button>
+                                 
+                              </div></div>
+                            </form>
+                            <!-- <pre>{{ service.form.value | json }}</pre> -->
+                              </div>
+                            </div></div>
+       
+    </div>
+</div>
+</div>
+

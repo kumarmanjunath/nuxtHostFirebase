@@ -1,0 +1,352 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="container">
+      <div class="row">
+          
+          <div class="col-lg-12">  
+              
+              <div class="search-div">
+                <div class="row">
+                  
+                  <div class="col-lg-4" style="padding-right:2px;">
+                <mat-form-field class="search-form-field" floatLabel="never">
+                  <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+                  <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+</div>
+<div class="col-lg-8" style="padding-right:2px;">
+<form  [formGroup]="form">
+  <div class="row">
+  
+<div class="col-lg-3" style="padding-right:2px;">
+
+<div class="row" >
+ 
+  <div class="col-lg-11" style="padding-left: 20px;">
+<mat-form-field>
+  <mat-select formControlName="status_id"  placeholder="Select Booking Status"
+  style="font-size: 14px;" (selectionChange)="showstatus($event.value)" required>
+ 
+   <!--    <mat-option value="{{fuel.description}}">{{fuel.description}}</mat-option> -->
+      <mat-option value="Done" >Done</mat-option>
+      <mat-option value="Pending">Pending</mat-option>
+      <mat-option value="All">All</mat-option>
+   
+  </mat-select>
+  <mat-error>This field is mandatory.</mat-error>
+</mat-form-field>
+  </div>
+
+</div>
+</div>
+<div class="col-lg-8">
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="add-bottom-padding">
+           <!--  <mat-radio-group  formControlName="package_id" (change)="radioChange($event)">
+                <mat-radio-button checked value="0">All</mat-radio-button>
+              <mat-radio-button value="1">Full Day</mat-radio-button>
+              <mat-radio-button value="2">Outstation</mat-radio-button>
+              <mat-radio-button value="3">Airport</mat-radio-button>
+            </mat-radio-group>
+-->
+            <mat-form-field>
+              <mat-select formControlName="package_id"  placeholder="Select Package"
+              style="font-size: 14px;" (selectionChange)="radioChange($event)" >
+                  <mat-option value="0">All</mat-option>
+                  <mat-option value="1">Full Day</mat-option>
+                  <mat-option value="2">Outstation</mat-option>
+                  <mat-option value="3">Airport</mat-option>
+              </mat-select>                              
+            </mat-form-field>
+
+          </div>
+
+          
+      </div>
+      <div class="col-lg-3">
+
+        <div class="add-bottom-padding">
+          <mat-form-field>
+            <mat-select formControlName="ctype"  placeholder="Select Booking Type"
+            style="font-size: 14px;" (selectionChange)="radioChange($event)" >
+                <mat-option value="All" >All</mat-option>
+                <mat-option value="Admin">Admin</mat-option>
+                              <mat-option value="UPI MWeb">UPI MWeb</mat-option>
+                              <mat-option value="UPI Web">UPI Web</mat-option>
+                             
+            </mat-select>                              
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-lg-5">
+      <div class="row">
+        <div class="col-lg-12">
+      <mat-form-field>
+        <mat-select formControlName="datetype"  placeholder="Select Date Search"
+          (selectionChange)="showdatepicker($event.value)" style="font-size: 14px;" [(ngModel)]="selectedOption" required>
+       
+         <!--    <mat-option value="{{fuel.description}}">{{fuel.description}}</mat-option> -->
+            <mat-option value="1" >Date : From the Beginning</mat-option>
+            <mat-option value="2">Date : From - To</mat-option>
+         
+        </mat-select>
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+        </div>
+        <div class="col-md-12">
+          <div class="row" id="rwdate" style="display:none;">
+            <div class="col-md-6">
+              <mat-form-field>
+                  <input formControlName="startdate" matInput [matDatepicker]="picker" (dateChange)="updateCalcs($event)" placeholder="From Date">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker ></mat-datepicker>
+                </mat-form-field>
+              </div>
+                <div class="col-md-6">
+                <mat-form-field>
+                    <input  formControlName="enddate" matInput [matDatepicker]="spicker" (dateChange)="updateCalcs($event)" placeholder="To Date">
+                    <mat-datepicker-toggle matSuffix [for]="spicker" ></mat-datepicker-toggle>
+                    <mat-datepicker #spicker ></mat-datepicker>
+                  </mat-form-field>
+                </div>
+          </div>
+          </div>
+
+      </div>   
+    </div>
+    <div class="col-lg-1">
+      <button mat-fab style="color: #fafafa;background: linear-gradient(60deg, #f44336, rgba(210, 21, 21, 0.87));padding: 0px;    margin-left: -12px;" (click)="exportAsXLSX()">
+        <mat-icon>get_app</mat-icon>
+      </button>
+    </div>
+
+</div>
+
+</div>            
+</div>
+
+</form>
+</div>
+</div>
+
+               
+              </div>
+          
+          <div class="card" style="margin-top: 8px;">
+              <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon" style="background: linear-gradient(60deg, #1c32ad, #3f51b5);">
+                  <i class="material-icons">assignment</i>
+                </div>
+                <h4 class="card-title ">Chauffeur/Airport Booking Table</h4>
+              </div>
+              <div class="card-body">
+
+
+
+<div>
+  <mat-table [dataSource]="listData"  matSort>
+
+  <!--   <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+    -->
+      <ng-container matColumnDef="slno">
+          <mat-header-cell *matHeaderCellDef >#</mat-header-cell>
+          <mat-cell *matCellDef="let element; let j = index"> 
+            {{ (j+1) + (myPaginator.pageIndex * myPaginator.pageSize) }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="sverified">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header></mat-header-cell>
+          <mat-cell  *matCellDef="let element" style="font-weight: 500;"> 
+    <!--     <div *ngIf="element.sverified;else other_content">  
+          <p style="    border-radius: 19px;
+          padding-top: 10px;
+          font-size: 10px;
+          color: antiquewhite;
+          padding: 1px;
+          text-align: center;
+          line-height: 11px;
+          background: green;
+          padding-top: 4px;">
+          <span >Customer verified</span>
+        </p> 
+</div>  -->
+   <div *ngIf="element.sverified=='1'">  
+    <p style="    border-radius: 19px;
+    padding-top: 10px;
+    font-size: 10px;
+    color: antiquewhite;
+    padding: 1px 5px;
+    text-align: center;
+    line-height: 11px;
+    background: green;
+    padding-top: 4px;">
+    <span >Verified</span>
+  </p> 
+</div> 
+<div *ngIf="element.sverified=='2'">  
+<p style="    border-radius: 19px;
+   padding: 1px 4px;
+font-size: 10px;
+color: antiquewhite;
+
+text-align: center;
+line-height: 11px;
+background: #027ffdbf!important;
+padding-top: 4px;">
+<span >SMS sent</span>
+</p>
+</div> 
+<!--      <ng-template #other_content> <p style="    border-radius: 19px;
+    padding-top: 10px;
+    font-size: 10px;
+    color: antiquewhite;
+    padding: 9px;
+  text-align: center;
+  line-height: 11px;
+  background: #027ffdbf!important;
+  padding-top: 10px;">
+    <span >SMS sent</span>
+  </p> </ng-template> -->
+          </mat-cell>
+        </ng-container>
+    <ng-container matColumnDef="booking_id">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Booking Id</mat-header-cell>
+      <mat-cell *matCellDef="let element"><span *ngIf="element.booking_type=='Offline'" style="color:red;    font-weight: 700;">{{element.booking_id}}</span><span *ngIf="element.booking_type==''" style="    font-weight: 700;">{{element.booking_id}}</span></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="carname">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>Car</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span *ngIf="element.booking_type=='Offline'" style="color:red;">{{element.carname}}</span><span *ngIf="element.booking_type==''">{{element.carname}}</span>
+     </mat-cell>
+      </ng-container>
+
+        <ng-container matColumnDef="package">
+            <mat-header-cell *matHeaderCellDef   mat-sort-header>Package</mat-header-cell>
+            <mat-cell  *matCellDef="let element"><span *ngIf="element.booking_type=='Offline'" style="color:red;">{{element.package}}</span><span *ngIf="element.booking_type==''">{{element.package}}</span></mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="start_date">
+              <mat-header-cell *matHeaderCellDef   mat-sort-header>Start Date</mat-header-cell>
+              <mat-cell  *matCellDef="let element"><span *ngIf="element.booking_type=='Offline'" style="color:red;">{{element.start_date}} {{element.start_time}}</span><span *ngIf="element.booking_type==''">{{element.start_date}} {{element.start_time}}</span>
+               </mat-cell>
+            </ng-container>   
+            <ng-container matColumnDef="end_date">
+              <mat-header-cell *matHeaderCellDef  mat-sort-header>End Date</mat-header-cell>
+              <mat-cell  *matCellDef="let element">
+                <span *ngIf="element.booking_type=='Offline'" style="color:red;">{{element.end_date }} {{element.end_time}}</span><span *ngIf="element.booking_type==''">{{element.end_date }} {{element.end_time}}</span>
+            </mat-cell>
+            </ng-container>
+      <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Location</mat-header-cell>
+          <mat-cell *matCellDef="let element"><span *ngIf="element.booking_type=='Offline'" style="color:red;">{{element.location}}</span><span *ngIf="element.booking_type==''">{{element.location}}</span></mat-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="customer_name">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Customer</mat-header-cell>
+            <mat-cell *matCellDef="let element" style="padding-right: 15px;"><span *ngIf="element.booking_type=='Offline'" style="color:red;">{{element.customer_name}}</span><span *ngIf="element.booking_type==''">{{element.customer_name}}</span></mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Phone</mat-header-cell>
+            <mat-cell *matCellDef="let element" style="padding-right: 15px;"><span *ngIf="element.booking_type=='Offline'" style="color:red;">{{element.phone}}</span><span *ngIf="element.booking_type==''">{{element.phone}}</span></mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Amount</mat-header-cell>
+            <mat-cell *matCellDef="let element"><span *ngIf="element.booking_type=='Offline'" style="color:red;">{{element.amount}}</span><span *ngIf="element.booking_type==''">{{element.amount}}</span></mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="mplatform">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Platform</mat-header-cell>
+            <mat-cell *matCellDef="let element"><span *ngIf="element.booking_type=='Offline'" style="color:red;">{{element.mplatform}}</span><span *ngIf="element.booking_type==''">
+              <span *ngIf="element.mplatform=='Android'">
+                {{element.mplatform}}
+                </span>
+                <span *ngIf="element.mplatform=='iOS'">
+                {{element.mplatform}}
+                  </span>
+                  <span *ngIf="element.mplatform=='Website'">
+                    {{element.mplatform}}
+                    </span>
+              
+              </span></mat-cell>
+          </ng-container>
+       
+          <ng-container matColumnDef="createdon">
+              <mat-header-cell *matHeaderCellDef  mat-sort-header>Created on</mat-header-cell>
+              <mat-cell *matCellDef="let element" style="padding-right: 10px;"><span *ngIf="element.booking_type=='Offline'" style="color:red;">{{ element.createdon.seconds * 1000 | date:'dd-MMM-yyyy hh:mm:ss a' }}</span><span *ngIf="element.booking_type==''">{{ element.createdon.seconds * 1000 | date:'dd-MMM-yyyy hh:mm:ss a' }}</span></mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="pendingtype">
+              <mat-header-cell style="font-size: 13px;" *matHeaderCellDef>Type </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span *ngIf="element.booking_type==''">
+                
+                {{element.pendingtype}}
+            </span>  
+            <span *ngIf="element.booking_type=='Offline'" style="color:red;">
+                
+              {{element.pendingtype}}
+          </span>    
+          
+          </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <mat-header-cell style="font-size: 13px;" *matHeaderCellDef>Status</mat-header-cell>
+              <mat-cell *matCellDef="let element" style="font-weight: 700;">
+                <span *ngIf="element.booking_type==''">
+                 <div *ngIf="element.status=='Pending'">  
+                <a  style="text-decoration: underline;cursor:pointer;" (click)="onConfirm(element)">{{element.status}}</a>
+       
+              </div>
+            
+            </span>    
+            <div *ngIf="element.status=='Done'">  
+              {{element.status}}
+            </div> 
+          </mat-cell>
+            </ng-container>
+  
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+       <!--  <div *ngIf="row.status=='Pending'">  
+          <button mat-icon-button  (click)="onConfirm(row)"><mat-icon style="color: #2e42b1;">work</mat-icon></button>
+ 
+        </div>  -->
+             <button mat-icon-button  (click)="onEdit(row)"><mat-icon style="color: #2e42b1;">launch</mat-icon></button>
+             <span *ngIf="row.status=='Done'"> <button mat-icon-button  (click)="onSMS(row)"><mat-icon style="color: #2e42b1;">textsms</mat-icon></button>
+             </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> 
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+   
+  </mat-table>
+  <mat-paginator  #myPaginator  [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="25" showFirstLastButtons></mat-paginator>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+          
+
+            </div>
+          </div>
+      

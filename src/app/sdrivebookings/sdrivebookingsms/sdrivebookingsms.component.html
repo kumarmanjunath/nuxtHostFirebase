@@ -1,0 +1,68 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-header ">
+                                <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+                    
+                            <h4 class="card-title">Sending Chauffeur details to Customer</h4></div>
+                            <div class="card-body">
+                              <form  [formGroup]="service.smsform" class="normal-form" autocomplete="off" (submit)="onSubmit()">
+                                <mat-grid-list cols="2" style="padding-top: 4%;" >
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="col-md-12">
+                                      
+                                          <mat-form-field>
+                                         
+                                            <input formControlName="drivername" (keyup)="service.applyFilter()" matInput  placeholder="Driver Name" required>
+                                            <mat-error>This field is mandatory.</mat-error>
+                                          </mat-form-field>          
+                                        </div>
+                                        <div class="col-md-12">
+                                            <mat-form-field>
+                                              <input formControlName="driverphone" (keyup)="service.applyFilter()" maxlength="10" matInput placeholder="Driver Phone No." required>
+                                              <mat-error *ngIf="service.smsform.controls['driverphone'].errors?.required">This field is mandatory.</mat-error>
+                              
+                                              <mat-error *ngIf="service.smsform.controls['driverphone'].errors?.minlength">Minimum 10 characters needed.</mat-error>
+                                              </mat-form-field> 
+                                        </div>
+                                        <div class="col-md-12">
+                                          <mat-form-field>
+                                            <input formControlName="driverreg" (keyup)="service.applyFilter()" maxlength="14" matInput placeholder="Car Registration No." >    
+                                          </mat-form-field>
+                                        </div>
+                                        <div class="col-md-12">
+                                          <mat-form-field>
+                                            <input formControlName="secretcode" maxlength="6" (keyup)="service.applyFilter()"  matInput placeholder="Customer OTP" disabled>   
+                                          </mat-form-field>
+                                        </div>
+                                          
+                                      </div>
+                                      <div class="col-md-6">
+                                      <mat-form-field>
+                                        <textarea readonly  [disabled]="true" style="    border: 1px solid #2196f3;
+                                         min-height: 274px!important;height: 274px!important;
+                                        padding: 8px;" matInput placeholder="Your Message" formControlName="txtmessage" cdkTextareaAutosize [value]="service.txtsmsmsg"
+                                          cdkAutosizeMinRows="6"></textarea>
+                                      </mat-form-field>
+                                    </div>
+                                    </div>
+                                 
+                                </mat-grid-list>
+                                <div class="row" style="padding: 5%;"><div >
+                                    <div class="row rqd" style="font-size: 11px; padding-left: 16px;">    *Required Fields</div>
+                                    <button mat-raised-button color="primary" type="submit" >Submit</button>
+                                    <button mat-raised-button color="warn" style="margin-left: 6px;" (click)="onClear()">Clear</button>
+                                   
+                                </div></div>
+                              </form>
+                              <!-- <pre>{{ service.form.value | json }}</pre> -->
+                                </div>
+                              </div></div>
+         
+      </div>
+  </div>
+</div>
+

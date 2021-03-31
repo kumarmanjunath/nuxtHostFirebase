@@ -1,0 +1,54 @@
+
+      <nav class="navbar navbar-expand-lg bg-primary navbar-transparent navbar-absolute" color-on-scroll="500"
+      ><div class="container"><div class="navbar-wrapper">
+          <a class="navbar-brand d-none d-sm-none d-md-block" href="">
+              HYPE Dashboard </a>
+          <a class="navbar-brand d-block d-sm-block d-md-none" href="/material-dashboard-pro-angular2/dashboard">MD Pro Angular</a>
+      </div><button class="navbar-toggler mat-button" mat-button="" type="button"><span class="mat-button-wrapper">
+          <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span><span class="navbar-toggler-icon icon-bar"></span>
+      </span><div class="mat-button-ripple mat-ripple" matripple=""></div><div class="mat-button-focus-overlay">
+
+      </div></button><div class="collapse navbar-collapse justify-content-end"><ul class="navbar-nav">
+          <li class="nav-item" routerlinkactive="active"><a class="nav-link" href="https://gohype.in">
+              <i class="material-icons">dashboard</i> Hype Website </a></li>
+              
+                             <!--  <li class="nav-item" routerlinkactive="active">
+                                  <a class="nav-link" href="/material-dashboard-pro-angular2/pages/lock"><i class="material-icons">
+                                      lock_open</i> Lock </a></li> -->
+                                  </ul></div></div></nav><router-outlet></router-outlet>
+                                     <div class="wrapper wrapper-full-page">
+                                          
+<div class="page-header login-page header-filter" filter-color="black" style="background-image: linear-gradient(black, #333333); background-size: cover; background-position: top center;">
+<div class="container" style="    padding-top: 20vh;
+padding-bottom: 17vh;"><div class="row"><div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+  <form action="" class="form ng-untouched ng-pristine ng-valid" method="" novalidate="">            
+      <div class="card card-login"><div class="card-header card-header-rose text-center" style="    background: linear-gradient(60deg,#027ffd, #027ffd);box-shadow:0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #2196f394;">
+          <h4 class="card-title">Hype Admin Login</h4>
+          <div class="social-line">
+           
+              <img style="height: 50px;" src="./assets/img/logowhite.png">
+                  
+  </div>
+</div>
+<div class="card-body ">
+<p class="card-description text-center">Dream bigger..</p>
+      <span class="bmd-form-group">
+        <div class="input-group"><div class="input-group-prepend"><span class="input-group-text">
+          <i class="material-icons">email</i></span></div>
+          <input class="form-control" #userName placeholder="Email..." autocomplete="email" type="email">
+        </div>
+      </span>
+      
+      <span class="bmd-form-group"><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">
+          <i class="material-icons">lock_outline</i></span></div><input class="form-control" #userPassword placeholder="Password..." #userPassword type="password">
+      </div></span>
+    </div>
+      <div class="card-footer justify-content-center"><a class="btn btn-rose btn-link btn-lg" (click)="onclk(userName.value, userPassword.value)">{{authService.clk}}</a>
+      </div>
+    </div>
+  </form>
+  </div>
+</div></div>
+</div></div>
+     

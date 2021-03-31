@@ -1,0 +1,147 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <mat-icon id="close-icons" style="float:right;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+                        <h4 class="card-title">Agent</h4>
+                        <p class="card-category">Enter Agent you want</p>
+                    
+                    </div>
+                    <div class="card-body">
+<form  [formGroup]="service.form" class="normal-form" autocomplete="off" (submit)="onSubmit()">
+  <mat-grid-list cols="2" style="padding-top: 4%;" >
+      <div class="row">
+          <div class="col-md-5">
+            <input type="hidden" formControlName="id">
+            <input type="hidden" formControlName="hfullname">
+            <input type="hidden" formControlName="hactive">
+            <mat-form-field>
+              <input formControlName="fullname" matInput  placeholder="Fullname" required>
+              <mat-error>This field is mandatory.</mat-error>
+            </mat-form-field>          
+          </div>
+          <div class="col-md-5">
+              <mat-form-field>
+                  <mat-select formControlName="location_id" placeholder="Select Location"  required>
+                      <mat-option>None</mat-option>
+                      <ng-container *ngFor="let location of locationservice.array">
+                        <mat-option value="{{location.description}}">{{location.description}}</mat-option>
+                      </ng-container>
+                    </mat-select>  
+                </mat-form-field> 
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <input formControlName="phone" maxlength="10" matInput placeholder="Phone" required>
+              
+              <mat-error *ngIf="service.form.controls['phone'].errors?.required">This field is mandatory.</mat-error>
+
+              <mat-error *ngIf="service.form.controls['phone'].errors?.minlength">Minimum 10 charactors needed.</mat-error>
+ 
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="phone1" maxlength="10" matInput placeholder="Alternative Phone 1">
+               
+                <mat-error *ngIf="service.form.controls['phone1'].errors?.minlength">Minimum 10 charactors needed.</mat-error>
+   
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="phone2" maxlength="10" matInput placeholder="Alternative Phone 2">
+                 
+                  <mat-error *ngIf="service.form.controls['phone2'].errors?.minlength">Minimum 10 charactors needed.</mat-error>
+     
+                </mat-form-field>
+              </div>
+          <div class="col-md-4">
+            <mat-form-field>
+                <input formControlName="email" matInput placeholder="Email" required>            
+                <mat-error>Invalid email address.</mat-error>              
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input formControlName="email1" matInput placeholder="Alternative Email 1" >   
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <input formControlName="email2" matInput placeholder="Alternative Email 2" >   
+                      </mat-form-field>
+                    </div>
+            <div class="col-md-3">
+            <mat-form-field>
+                <input formControlName="bank" matInput placeholder="Bank Name">
+            
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                  <input formControlName="accno" matInput placeholder="Account No">
+                 
+                </mat-form-field>
+               
+              </div>
+              <div class="col-md-3">
+
+
+               
+                    <mat-form-field>
+                        <input formControlName="ifsc" matInput  placeholder="IFSC Code">
+                       
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field>
+                          <input formControlName="servicetax" matInput  placeholder="Service Tax No.">
+                        
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field>
+                            <input formControlName="tax" matInput  placeholder="Tax Amount(%)">
+                           
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field>
+                              <input formControlName="commission" matInput  placeholder="Commission(%)" >
+                             
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-3">
+                            <mat-form-field>
+                                <input formControlName="discount" matInput placeholder="Discount(%)" >
+                               
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+              <div class="add-bottom-padding">
+                <mat-checkbox  matInput formControlName="active">Active</mat-checkbox>
+              </div>
+            
+        </div>
+      </div>
+   
+  </mat-grid-list>
+  <div class="row" style="padding: 5%;"><div >
+      <div class="row rqd" style="font-size: 11px; padding-left: 16px;">    *Required Fields</div>
+      <button mat-raised-button color="primary" type="submit" >Submit</button>
+      <button mat-raised-button color="warn" style="margin-left: 6px;" (click)="onClear()">Clear</button>
+     
+  </div></div>
+</form>
+<!-- <pre>{{ service.form.value | json }}</pre> -->
+  </div>
+              </div>
+          </div>
+         
+      </div>
+  </div>
+</div>
+
