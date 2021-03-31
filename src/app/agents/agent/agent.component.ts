@@ -20,6 +20,7 @@ const firestore = firebase.firestore()
 export class AgentComponent implements OnInit {
   locations = [];
   str = "";
+  
   constructor(public dialogRef: MatDialogRef<AgentComponent>, private formBuilder: FormBuilder, public service: AgentService, public locationservice: LocationService, private firestore: AngularFirestore, private toastr: ToastrService, public dailogRef: MatDialogRef<AgentComponent>) { }
   interestFormGroup: FormGroup
   interests: any;
